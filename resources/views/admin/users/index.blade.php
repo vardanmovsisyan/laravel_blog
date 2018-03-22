@@ -17,9 +17,19 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td><img src="#{{--{{asset($user->profile->avatar)}}--}}" alt="{{$user->name}}" width="60px" height="60px"></td>
+                    @if(gettype($user->profile)=='NULL')
+                        <td><img src="#{{--{!! asset($user->profile->avatar)!!}--}}" alt="{{$user->name}}" width="60px" height="60px"></td>
+                    @else
+                        <td><img src="{!! asset($user->profile->avatar)!!}" alt="{{$user->name}}" width="60px" height="60px"></td>
+                    @endif
                     <td>{{$user->name}}</td>
-                    <td>Permissions</td>
+                    <td>
+                        @if($user->admin)
+                            <a href="{{route('user.not.admin',['id'=>$user->id])}}" class="btn btn-xs btn-danger">Not admin</a>
+                        @else
+                            <a href="{{route('user.admin',['id'=>$user->id])}}" class="btn btn-xs btn-info">Make admin</a>
+                        @endif
+                    </td>
                     <td>
                         <a href="#" class="btn btn-xs btn-info">Edit</a>
                     </td>
