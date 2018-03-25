@@ -85,12 +85,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('tag.create')}}">Create Tag</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('users')}}">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.create')}}">New User</a>
-                        </li>
+                        @if(Auth::user()->admin)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('users')}}">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('user.create')}}">New User</a>
+                            </li>
+                        @endif
                     </ul>
                 @endif
             </nav>
